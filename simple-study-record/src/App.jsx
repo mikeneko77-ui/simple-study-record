@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { selectAll } from "../utils/supabase";
+import { insertRecord, selectAll, deleteRecord } from "../utils/supabase";
 import { InputRecord } from "./components/InputRecord";
 import { RecordsHistory } from "./components/RecordsHistory";
 import { RecordsValidator } from "./components/RecordsValidator";
@@ -10,13 +10,16 @@ export const App = () => {
   const [studyDuration, setStudyDuration] = useState(0);
   const [records, setRecords] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRecords = async () => {
+      setLoading(true);
       const data = await selectAll();
       if (data) {
         setRecords(data);
       }
+      setLoading(false);
     };
     fetchRecords();
   }, []);
@@ -29,22 +32,37 @@ export const App = () => {
     setStudyDuration(event.target.value);
   };
 
-  const onClickAdd = () => {
+  const onClickDelete = async (id) => {
+    const success = await deleteRecord(id);
+    if (success) {
+      setRecords(records.filter((record) => record.id !== id));
+    }
+  };
+
+  const onClickAdd = async () => {
     const contentIsNull = studyContent.length === 0;
     const durationIsNull = studyDuration === 0;
     if (contentIsNull || durationIsNull) {
       setError(true);
     } else {
-      const newRecords = [
-        ...records,
-        { title: studyContent, time: studyDuration },
-      ];
-      setRecords(newRecords);
+      const newRecords = await insertRecord(studyContent, studyDuration);
+      if (newRecords) {
+        setRecords([...records, ...newRecords]);
+      }
+      // const newRecords = [
+      //   ...records,
+      //   { title: studyContent, time: studyDuration },
+      // ];
+      // setRecords(newRecords);
       setError(false);
       setStudyContent("");
       setStudyDuration(0);
     }
   };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -56,7 +74,7 @@ export const App = () => {
         onClickAdd={onClickAdd}
       />
       <RecordsValidator error={error} />
-      <RecordsHistory records={records} />
+      <RecordsHistory records={records} onDelete={onClickDelete} />
       <TotalRecords records={records} />
     </>
   );
