@@ -61,7 +61,7 @@ export const App = () => {
 
   return (
     <>
-      <h1>学習記録アプリ</h1>
+      <h1>学習記録アプリ2</h1>
       <InputRecord
         studyContent={studyContent}
         studyDuration={studyDuration}
