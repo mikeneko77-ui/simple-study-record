@@ -9,6 +9,9 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: simple-study-record
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
@@ -21,3 +24,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SIMPLE_STUDY_RECORD_86891 }}
           channelId: live
           projectId: simple-study-record-86891
+          entryPoint: simple-study-record
