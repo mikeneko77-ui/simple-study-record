@@ -49,11 +49,6 @@ export const App = () => {
       if (newRecords) {
         setRecords([...records, ...newRecords]);
       }
-      // const newRecords = [
-      //   ...records,
-      //   { title: studyContent, time: studyDuration },
-      // ];
-      // setRecords(newRecords);
       setError(false);
       setStudyContent("");
       setStudyDuration(0);
@@ -66,6 +61,7 @@ export const App = () => {
 
   return (
     <>
+      <h1>学習記録アプリ</h1>
       <InputRecord
         studyContent={studyContent}
         studyDuration={studyDuration}
