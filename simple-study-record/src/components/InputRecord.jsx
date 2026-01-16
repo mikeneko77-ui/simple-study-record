@@ -10,8 +10,9 @@ export const InputRecord = (props) => {
   return (
     <>
       <div style={formStyle}>
-        <label>学習内容</label>
+        <label htmlFor="studyContent">学習内容</label>
         <input
+          id="studyContent"
           type="text"
           value={studyContent}
           onChange={onChangeStudyContent}
@@ -19,8 +20,9 @@ export const InputRecord = (props) => {
       </div>
 
       <div style={formStyle}>
-        <label>学習時間</label>
+        <label htmlFor="studyDuration">学習時間</label>
         <input
+          id="studyDuration"
           type="number"
           value={studyDuration}
           onChange={onChangeStudyDuration}
