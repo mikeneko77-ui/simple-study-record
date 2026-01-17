@@ -22,8 +22,23 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
+    settings: {
+      react: { version: '19.2' },
+    },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': 'off',
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
+  },
+  // テストファイル用の設定
+  {
+    files: ['**/*.test.{js,jsx}', '**/*.spec.{js,jsx}', '**/tests/**/*.{js,jsx}'],
+    languageOptions: {
+      globals: globals.jest,
     },
   },
 ])
