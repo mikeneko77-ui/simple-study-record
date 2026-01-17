@@ -1,16 +1,57 @@
-# React + Vite
+# 学習記録アプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+学習内容と学習時間を記録・管理できるシンプルなWebアプリケーションです。
 
-Currently, two official plugins are available:
+## 機能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 学習内容と学習時間の登録
+- 学習記録の一覧表示
+- 学習記録の削除
+- 合計学習時間の表示
 
-## React Compiler
+## 技術スタック
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite 7
+- Supabase (データベース)
+- Jest / React Testing Library (テスト)
+- Firebase Hosting (デプロイ)
 
-## Expanding the ESLint configuration
+## 環境設定
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+### 2. 環境変数の設定
+
+プロジェクトルートに`.env`ファイルを作成し、以下の環境変数を設定してください。
+
+```
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+Supabaseのプロジェクト設定画面からURLとAnon Keyを取得できます。
+
+## 起動方法
+
+### 開発サーバーの起動
+
+```bash
+npm run dev
+```
+
+ブラウザで http://localhost:5173 にアクセスしてください。
+
+### その他のコマンド
+
+| コマンド | 説明 |
+|---------|------|
+| `npm run dev` | 開発サーバー起動 |
+| `npm run build` | 本番用ビルド |
+| `npm run preview` | ビルド結果のプレビュー |
+| `npm test` | テスト実行 |
+| `npm run lint` | ESLint実行 |
